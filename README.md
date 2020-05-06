@@ -28,7 +28,7 @@
 
 ##### -XX:+PrintStringTableStatistics
 
-#### -XX:+PrintReferenceGC
+##### -XX:+PrintReferenceGC
 
 ##### -XX:+PrintGCApplicationStoppedTime
 
@@ -75,6 +75,3 @@
 &nbsp;&nbsp; 先加入此-XX:+ParallelRefProcEnabled参数，并行清理Reference，然后等基础架构组更改为使用长连接做心跳
 
 ----
-
-
-
