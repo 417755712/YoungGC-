@@ -28,7 +28,7 @@
 
 ##### -XX:+PrintStringTableStatistics
 
-##### -XX:+PrintReferenceGC
+#### -XX:+PrintReferenceGC
 
 ##### -XX:+PrintGCApplicationStoppedTime
 
@@ -38,9 +38,9 @@
 
 ![gc.png](https://upload-images.jianshu.io/upload_images/22682521-37ec683d57c42309.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-######发现清理FinalReference的时候，清理时间过长
+###### 发现清理FinalReference的时候，清理时间过长
 
-######找到原因之后，就需要分析一下，FinalReference对象是哪里来的，对应到Java代码的关系是什么？
+###### 找到原因之后，就需要分析一下，FinalReference对象是哪里来的，对应到Java代码的关系是什么？
 
 经过查询资料验证，发现当java对象自己实现了finalize()方法的时候，这类对象就会进入FinalReference队列，等待JVM进行垃圾回收的时候，会调用这个对象的finalize()方法，并判断调用完此方法之后，这个对象是否变可达，如果不可达，下次GC的时候会回收掉，主要的使用场景是一些连接资源用来防止使用者忘记关闭/释放连接，在此方法做兜底，或者有特殊需要定制的对象，想自己控制自己的存活时间，可以在此方法内，让自己变得可达，避免垃圾回收。
 
